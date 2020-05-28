@@ -1,0 +1,16 @@
+version: "3.4"
+
+services:
+  rabbit:
+    container_name: rabbit
+    image: rabbitmq:3.6.10-alpine
+    ports:
+      - 5672:5672
+      - 15672:15672
+  celery:
+    container_name: celery
+    image: david/celery-experiment
+    command: celery -A tasks worker --loglevel=info -Q unused
+    # command: celery -A tasks worker --loglevel=info -Q unused --pool=gevent
+    depends_on:
+      - rabbit
