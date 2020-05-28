@@ -21,6 +21,7 @@ def on_message(message):
         message.ack()
     except:
         logging.exception("aborted")
+        raise
 
 
 class FooConsumerStep(bootsteps.ConsumerStep):
